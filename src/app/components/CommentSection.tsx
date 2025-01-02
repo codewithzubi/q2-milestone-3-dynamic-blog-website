@@ -92,7 +92,7 @@ export default function CommentSection({ postId, initialComments }: { postId: st
         ></textarea>
         <button
           onClick={addComment}
-          className="mt-4 bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+          className="mt-4 bg-black text-white px-6 py-2 rounded-lg transition-colors"
         >
           Add Comment
         </button>
@@ -101,3 +101,4 @@ export default function CommentSection({ postId, initialComments }: { postId: st
   )
 }
 
+  

@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       comments: []
     }
 
-    addBlogPost(newPost)
+    await addBlogPost(newPost)
 
     return NextResponse.json({ message: 'Blog post submitted successfully', post: newPost }, { status: 201 })
   } catch (error) {
