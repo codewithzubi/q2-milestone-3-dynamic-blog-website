@@ -4,6 +4,8 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { User, Mail, FileText, Upload, X } from 'lucide-react'
 import Image from 'next/image'
+import { addBlogPost } from '../../../lib/BlogPosts'
+import { BlogPost } from '../../../lib/types'
 
 export default function SubmitBlogPage() {
   const router = useRouter()
@@ -53,31 +55,23 @@ export default function SubmitBlogPage() {
     e.preventDefault()
     setIsSubmitting(true)
     setError(null)
-    const formDataToSend = new FormData()
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value)
-    })
-    if (image) {
-      formDataToSend.append('image', image)
-    }
 
     try {
-      const response = await fetch('/api/submit-blog', {
-        method: 'POST',
-        body: formDataToSend,
-      })
-
-      const result = await response.json()
-
-      if (response.ok) {
-        console.log('Blog post submitted successfully:', result)
-        alert('Blog post submitted successfully!')
-        router.refresh() // Refresh the current route
-        router.push('/blog')
-      } else {
-        console.error('Failed to submit blog post:', result)
-        setError(`Failed to submit blog post. ${result.error || 'Please try again.'}`)
+      const newPost: BlogPost = {
+        id: Date.now().toString(),
+        title: formData.title,
+        author: formData.author,
+        date: new Date().toISOString().split('T')[0],
+        excerpt: formData.content.substring(0, 150) + '...',
+        content: formData.content,
+        image: imagePreview || '/placeholder.svg?height=400&width=800',
+        comments: []
       }
+
+      await addBlogPost(newPost)
+      alert('Blog post submitted successfully!')
+      router.refresh() // Refresh the current route
+      router.push('/blog')
     } catch (error) {
       console.error('Error submitting blog post:', error)
       setError(`An error occurred: ${error instanceof Error ? error.message : 'Please try again.'}`)
@@ -95,13 +89,13 @@ export default function SubmitBlogPage() {
           <span className="block sm:inline">{error}</span>
         </div>
       )}
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow-md">
+      <form onSubmit={handleSubmit} className="space-y-6 bg-black p-6 rounded-lg shadow-md">
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-heading mb-1">
+          <label htmlFor="title" className="block text-sm font-medium text-heading mb-1 text-white">
             Title
           </label>
           <div className="relative">
-            <FileText className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+            <FileText className="absolute left-3  h-5 w-5 text-gray-400" />
             <input
               type="text"
               id="title"
@@ -116,11 +110,11 @@ export default function SubmitBlogPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="author" className="block text-sm font-medium text-heading mb-1">
+            <label htmlFor="author" className="block text-sm font-medium text-heading mb-1 text-white">
               Author
             </label>
             <div className="relative">
-              <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <User className="absolute left-3  h-5 w-5 text-gray-400" />
               <input
                 type="text"
                 id="author"
@@ -134,11 +128,11 @@ export default function SubmitBlogPage() {
             </div>
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-heading mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-heading mb-1 text-white">
               Email
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <Mail className="absolute left-3  h-5 w-5 text-gray-400" />
               <input
                 type="email"
                 id="email"
@@ -153,7 +147,7 @@ export default function SubmitBlogPage() {
           </div>
         </div>
         <div>
-          <label htmlFor="content" className="block text-sm font-medium text-heading mb-1">
+          <label htmlFor="content" className="block text-sm font-medium text-heading mb-1 text-white">
             Content
           </label>
           <textarea
@@ -168,14 +162,14 @@ export default function SubmitBlogPage() {
           ></textarea>
         </div>
         <div>
-          <label htmlFor="image" className="block text-sm font-medium text-heading mb-1">
+          <label htmlFor="image" className="block text-sm font-medium text-heading mb-1 text-white">
             Image (Max 5MB)
           </label>
           <div className="flex items-center space-x-4">
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="px-4 py-2 bg-secondary text-white rounded-md hover:bg-primary transition-colors duration-300 flex items-center"
+              className="px-4 py-2 bg-white text-black rounded-md hover:bg-primary transition-colors duration-300 flex items-center"
             >
               <Upload className="w-5 h-5 mr-2" />
               {image ? 'Change Image' : 'Upload Image'}
@@ -212,7 +206,7 @@ export default function SubmitBlogPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-accent text-white py-2 px-4 rounded-md hover:bg-primary transition-colors duration-300 disabled:opacity-50"
+          className="w-full bg-white text-black py-2 px-4 rounded-md hover:bg-primary transition-colors duration-300 disabled:opacity-50"
         >
           {isSubmitting ? 'Submitting...' : 'Submit Colorful Blog Post'}
         </button>

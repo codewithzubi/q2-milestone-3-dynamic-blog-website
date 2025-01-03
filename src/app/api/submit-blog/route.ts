@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
       const filename = `${Date.now()}-${image.name.replace(/[^a-zA-Z0-9.-]/g, '')}`
       const uploadDir = path.join(process.cwd(), 'public', 'uploads')
-      
+  
       try {
         await mkdir(uploadDir, { recursive: true })
         await writeFile(path.join(uploadDir, filename), buffer)
