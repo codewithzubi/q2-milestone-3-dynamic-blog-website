@@ -29,7 +29,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className=" transition-colors transition-transform duration-200 hover:scale-110 inline-block">
+                <Link href="/contact" className="  transition-transform duration-200 hover:scale-110 inline-block">
                   Contact
                 </Link>
               </li>

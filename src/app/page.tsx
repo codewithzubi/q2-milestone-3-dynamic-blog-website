@@ -16,7 +16,7 @@ export default async function Home() {
             <p className="text-xl md:text-2xl mb-8">Exploring the vibrant world of Artificial Intelligence</p>
             <Link 
               href="/blog" 
-              className="bg-accent text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-300"
+              className="text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-300 hover:bg-white hover:text-black"
             >
               Explore Our Blog
             </Link>

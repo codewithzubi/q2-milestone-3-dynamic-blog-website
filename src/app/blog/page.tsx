@@ -8,7 +8,7 @@ export default async function BlogListingPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-center text-heading">Colorful AI Insights Blog</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center text-heading">AI Insights Blog</h1>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {blogPosts.map((post) => (
           <BlogPostCard key={post.id} post={post} />
