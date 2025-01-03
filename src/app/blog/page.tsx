@@ -1,9 +1,10 @@
-import { use } from 'react'
 import BlogPostCard from '../components/BlogPostCard'
 import { getBlogPosts } from '../../../lib/BlogPosts'
 
-export default function BlogListingPage() {
-  const blogPosts = use(getBlogPosts())
+export const revalidate = 0 // This ensures the page is not cached
+
+export default async function BlogListingPage() {
+  const blogPosts = await getBlogPosts()
 
   return (
     <div className="max-w-6xl mx-auto">

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FiGithub,FiLinkedin,FiTwitter } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
 
 export default function Footer() {
   return (
@@ -13,31 +13,40 @@ export default function Footer() {
           <div className="w-full sm:w-1/2 lg:w-1/3 mb-6 lg:mb-0">
             <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link href="/" className="hover:text-orange-500 transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-orange-500 transition-colors">About</Link></li>
-              <li><Link href="/blog" className="hover:text-orange-500 transition-colors">Blog</Link></li>
-              <li><Link href="/contact" className="hover:text-orange-500 transition-colors">Contact</Link></li>
+              <li>
+                <Link href="/" className=" transition-colors transition-transform duration-200 hover:scale-110 inline-block">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className=" transition-colors transition-transform duration-200 hover:scale-110 inline-block">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className=" transition-colors transition-transform duration-200 hover:scale-110 inline-block">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className=" transition-colors transition-transform duration-200 hover:scale-110 inline-block">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="w-full sm:w-1/2 lg:w-1/3 mt-6 lg:mt-0">
             <h4 className="text-lg font-semibold mb-2">Follow Us</h4>
             <div className="flex space-x-4">
-
-
-
-            <Link href="https://github.com/codewithzubi" className="hover:text-orange-700 text-white">
-            <FiGithub className="text-2xl"/>
+              <Link href="#" className=" text-white transition-transform duration-200 hover:scale-110 inline-block">
+                <FiGithub className="text-2xl"/>
               </Link>
-
-              <Link href="https://github.com/codewithzubi" className="hover:text-orange-700 text-white">
-              <FiLinkedin  className="text-2xl"/>
+              <Link href="#" className=" text-white transition-transform duration-200 hover:scale-110 inline-block">
+                <FiLinkedin className="text-2xl"/>
               </Link>
-
-              <Link href="https://github.com/codewithzubi" className="hover:text-orange-700 text-white">
-              <FiTwitter  className="text-2xl"/>
+              <Link href="#" className=" text-white transition-transform duration-200 hover:scale-110 inline-block">
+                <FiTwitter className="text-2xl"/>
               </Link>
-              
-             
             </div>
           </div>
         </div>
